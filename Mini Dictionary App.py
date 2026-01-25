@@ -9,3 +9,16 @@ while option!=5:
         dictionary[word]=definition
         print(dictionary)
         print(f"{word} has been added to the dictionary")
+    elif option==2:
+        value=input("Enter the word you want to retrieve:").strip()
+        print(dictionary[value])
+    elif option==3:
+        delete=input("Enter the word you want to delete:").strip()
+        del dictionary[delete]
+        print(f"{delete} has been deleted from the dictionary")
+    elif option==4:
+        for key in dictionary:
+            print(key,dictionary[key])
+    elif option==5:
+        print("Thank you for using The Dictionary!")
+        break

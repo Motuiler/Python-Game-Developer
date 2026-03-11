@@ -1,0 +1,37 @@
+import random
+import pgzrun
+
+WIDTH=500
+HEIGHT=500
+TITLE='Human Life Cycle'
+
+prenatal=Actor('prenatal')
+infant=Actor('infancy')
+child=Actor('child')
+adolescence=Actor('adolesence')
+adult=Actor('adult')
+elderly=Actor('elderly')
+
+prenatal.x=random.randint(50,WIDTH-50)
+prenatal.y=random.randint(90,HEIGHT-50)
+infant.x=random.randint(50,WIDTH-50)
+infant.y=random.randint(90,HEIGHT-50)
+child.x=random.randint(50,WIDTH-50)
+child.y=random.randint(90,HEIGHT-50)
+adolescence.x=random.randint(50,WIDTH-50)
+adolescence.y=random.randint(90,HEIGHT-50)
+adult.x=random.randint(50,WIDTH-50)
+adult.y=random.randint(90,HEIGHT-50)
+elderly.x=random.randint(50,WIDTH-50)
+elderly.y=random.randint(90,HEIGHT-50)
+
+def draw():
+    screen.blit('human background',(0,0))
+    prenatal.draw()
+    infant.draw()
+    child.draw()
+    adolescence.draw()
+    adult.draw()
+    elderly.draw()
+
+pgzrun.go()

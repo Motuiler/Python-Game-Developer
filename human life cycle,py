@@ -1,5 +1,6 @@
 import random
 import pgzrun
+import time
 
 WIDTH=500
 HEIGHT=500
@@ -11,6 +12,8 @@ child=Actor('child')
 adolescence=Actor('adolesence')
 adult=Actor('adult')
 elderly=Actor('elderly')
+
+
 
 prenatal.x=random.randint(50,WIDTH-50)
 prenatal.y=random.randint(90,HEIGHT-50)
@@ -25,6 +28,15 @@ adult.y=random.randint(90,HEIGHT-50)
 elderly.x=random.randint(50,WIDTH-50)
 elderly.y=random.randint(90,HEIGHT-50)
 
+actors=[prenatal,infant,child,adolescence,adult,elderly]
+curact=0
+num=6
+lines=[]
+
+starttime=time.time()
+timepassed=0
+
+
 def draw():
     screen.blit('human background',(0,0))
     prenatal.draw()
@@ -33,5 +45,25 @@ def draw():
     adolescence.draw()
     adult.draw()
     elderly.draw()
+    for line in lines:
+        screen.draw.line(line[0],line[1],'red')
+    screen.draw.text(f'Timer:{timepassed}',(10,10),fontsize=50,color='red')
 
+def on_mouse_down(pos):
+    global curact,actors,lines
+    if curact<num:
+        if actors[curact].collidepoint(pos):
+            if curact!=0:
+                curpos=actors[curact].pos
+                prevpos=actors[curact-1].pos
+                lines.append([curpos,prevpos])
+            curact=curact+1 
+        else:
+            lines=[]
+            curact=0       
+    print(lines)
+def update():
+    global timepassed
+    if curact!=num:
+        timepassed=round(time.time()-starttime,1)
 pgzrun.go()

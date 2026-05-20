@@ -73,6 +73,12 @@ def update():
                     bullets.remove(bullet)
                     enemies[i].remove(enemy)
                     score=score+1
+
+    for row in enemies:
+        for enemy in row:
+            if enemy.colliderect(ship):
+                gameover=True
+                gameovermessage='Better Luck Next Time!'
     
 
 

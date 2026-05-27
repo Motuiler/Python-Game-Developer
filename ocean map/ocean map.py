@@ -7,9 +7,10 @@ HEIGHT=510
 TITLE='Ocean Map Treasure Hunt'
 
 oceans=[]
-attempts=25
+attempts=15
 message=''
 gameover=False
+waiting=False
 y=10
 for i in range(5):
     row=[]
@@ -35,20 +36,25 @@ def draw():
         screen.draw.text(message,center=(WIDTH/2,HEIGHT/2),fontsize=35,color='black')
     
 def on_mouse_down(pos):
-    global gameover,attempts,message
-    if not gameover:
+    global attempts,gameover,message,waiting
+    if not gameover and not waiting:
         for i in range(5):
             for j in range(5):
                 if oceans[i][j].collidepoint(pos):
                     attempts=attempts-1
                     if i==treasurerow and j==treasurecolumn:
                         oceans[i][j].image='treasure'
-                        time.sleep(8)
-                        message='You win!'
-                        gameover=True
+                        waiting=True
+                        clock.schedule(gamewon,3)
                     if attempts==0:
                         message='You lost!'
                         gameover=True
+
+def gamewon():
+    global gameover,message
+    message='You win!'
+    gameover=True
+
                 
 
 pgzrun.go()

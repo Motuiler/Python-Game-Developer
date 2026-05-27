@@ -42,7 +42,6 @@ def draw():
     else:
         screen.draw.text(f'You scored {score} out of {totque}!',center=(WIDTH/2,HEIGHT/2),color='black',fontsize=50)
 
-
 def readfile():
     global info,totque
     file=open('quiz questions.txt','r')
@@ -73,18 +72,15 @@ def updatetime():
 
 def on_mouse_down(pos):
     global score
-    if skip.collidepoint(pos):
-        readnextque()
-    
-    for opt in opts:
-        if opt.collidepoint(pos):
-            if opts.index(opt)==int(question[5])-1:
-                score=score+1
+    if not gameover:
+        if skip.collidepoint(pos):
             readnextque()
-
-
-
-
+        
+        for opt in opts:
+            if opt.collidepoint(pos):
+                if opts.index(opt)==int(question[5])-1:
+                    score=score+1
+                readnextque()
 
 readfile()
 readnextque()
